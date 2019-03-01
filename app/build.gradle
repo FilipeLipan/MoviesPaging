@@ -1,0 +1,75 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.example.moviespaging"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    buildTypes.each {
+//        TODO put your api key here
+        it.buildConfigField 'String', 'MOVIES_DB_API_KEY', '"API_KEY_HERE"'
+        it.buildConfigField 'String', 'HOST', '"https://api.themoviedb.org/3/"'
+        it.buildConfigField 'String', 'BASE_POSTER_URL', '"http://image.tmdb.org/t/p/w185"'
+        it.buildConfigField 'String', 'BASE_POSTER_URL_HD', '"http://image.tmdb.org/t/p/w342"'
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.1.0-alpha02'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.1.2-alpha01'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.2-alpha01'
+
+    implementation 'com.android.support.constraint:constraint-layout:2.0.0-alpha3'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+
+    // Retrofit & OkHttp
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+
+    // OkHttp
+    implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
+
+    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$retrofitCoroutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
+
+    //Paging
+    implementation "androidx.paging:paging-runtime:2.1.0"
+
+    implementation "androidx.arch.core:core-runtime:2.0.0"
+
+    implementation 'com.github.FilipeLipan:BaseRecyclerViewAdapterHelper:2.9.53'
+
+    // Koin for Android
+    implementation 'org.koin:koin-android:1.0.2'
+    // or Koin for Lifecycle scoping
+    implementation 'org.koin:koin-android-scope:1.0.2'
+    // or Koin for Android Architecture ViewModel
+    implementation 'org.koin:koin-android-viewmodel:1.0.2'
+
+    implementation "com.github.diefferson:CoroutinesCache:0.2.0"
+
+}
+
